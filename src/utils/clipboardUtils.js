@@ -35,3 +35,13 @@ export const copyToClipboard = async (text, buttonElement) => {
     }
   }
 };
+
+// Utility function to get text content from element (textarea or div)
+export const getTextContent = (element) => {
+  if (element.tagName.toLowerCase() === 'textarea') {
+    return element.value;
+  } else {
+    // For div elements, get the text content without HTML tags
+    return element.textContent || element.innerText || '';
+  }
+};

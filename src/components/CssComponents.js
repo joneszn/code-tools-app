@@ -1,5 +1,6 @@
 import { BeautifyCss, MinifyCss } from '../utils/cssUtils';
-import { copyToClipboard } from '../utils/clipboardUtils';
+import { copyToClipboard, getTextContent } from '../utils/clipboardUtils';
+import { highlightCss } from '../utils/syntaxHighlighter';
 
 // CSS Components
 export function CssInput() {
@@ -18,13 +19,20 @@ export function CssInput() {
 
 export function CssOutput() {
   const handleCopy = (e) => {
-    const textarea = e.target.parentElement.querySelector('.code-output');
-    copyToClipboard(textarea.value, e.target);
+    const outputDiv = e.target.parentElement.querySelector('.code-output');
+    const text = getTextContent(outputDiv);
+    copyToClipboard(text, e.target);
   };
 
   return (
     <div className="textarea-container">
-      <textarea className="code-output" tabIndex="-1" defaultValue="CSS output will be displayed here"></textarea>
+      <div 
+        className="code-output" 
+        tabIndex="-1"
+        dangerouslySetInnerHTML={{
+          __html: '<span style="color: #999; font-style: italic;">CSS output will be displayed here</span>'
+        }}
+      ></div>
       <button className="copy-button" onClick={handleCopy} title="Copy output"></button>
     </div>
   );
@@ -37,13 +45,16 @@ export function BtnMinifyCss() {
       const outputElement = document.querySelector('.code-output');
       if (input){
         const output = MinifyCss(input);
-        outputElement.value = output;
         
         // Add error class if output is an error message
         if (output.startsWith("Error:")) {
           outputElement.classList.add('error');
+          outputElement.classList.remove('highlighted');
+          outputElement.innerHTML = output;
         } else {
           outputElement.classList.remove('error');
+          outputElement.classList.add('highlighted');
+          outputElement.innerHTML = highlightCss(output);
         }
       }
     }}>
@@ -59,13 +70,16 @@ export function BtnBeautifyCss() {
       const outputElement = document.querySelector('.code-output');
       if (input) {
         const output = BeautifyCss(input);
-        outputElement.value = output;
 
         // Add error class if output is an error message
         if (output.startsWith("Error:")) {
           outputElement.classList.add('error');
+          outputElement.classList.remove('highlighted');
+          outputElement.innerHTML = output;
         } else {
           outputElement.classList.remove('error');
+          outputElement.classList.add('highlighted');
+          outputElement.innerHTML = highlightCss(output);
         }
       }
     }}>

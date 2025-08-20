@@ -68,12 +68,15 @@ body {
   font-size: 16px;
   border: 2px solid #ccc;
   border-radius: 8px;
-  resize: none;
   overflow: auto;
   margin-top: 20px;
   font-family: 'Courier New', monospace;
   position: relative;
   box-sizing: border-box;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #ffffff;
+  line-height: 1.4;
 }
 
 .textarea-container {
@@ -128,6 +131,156 @@ body {
 
 .code-output.error {
   color: red;
+}
+
+/* Syntax highlighting styles */
+.code-output.highlighted {
+  color: #333;
+  background-color: #fafafa;
+}
+
+/* JSON Syntax Highlighting - VS Code inspired colors */
+.json-key {
+  color: #0451a5; /* Blue for keys */
+  font-weight: 500;
+}
+
+.json-string {
+  color: #a31515; /* Red for string values */
+}
+
+.json-number {
+  color: #098658; /* Green for numbers */
+}
+
+.json-boolean {
+  color: #0000ff; /* Blue for booleans */
+}
+
+.json-null {
+  color: #795e26; /* Brown for null */
+}
+
+.json-punctuation {
+  color: #000000; /* Black for punctuation */
+  font-weight: 500;
+}
+
+/* XML Syntax Highlighting */
+.xml-tag {
+  color: #800000; /* Dark red for tags */
+  font-weight: 600;
+}
+
+.xml-attribute-name {
+  color: #ff0000; /* Red for attribute names */
+  font-weight: 500;
+}
+
+.xml-attribute-value {
+  color: #0000ff; /* Blue for attribute values */
+}
+
+.xml-bracket {
+  color: #0000ff; /* Blue for < > brackets */
+  font-weight: 600;
+}
+
+.xml-equals {
+  color: #000000; /* Black for = sign */
+}
+
+.xml-text {
+  color: #000000; /* Black for text content */
+}
+
+.xml-comment {
+  color: #008000; /* Green for comments */
+  font-style: italic;
+}
+
+.xml-processing {
+  color: #795e26; /* Brown for processing instructions */
+  font-style: italic;
+}
+
+.xml-cdata {
+  color: #098658; /* Green for CDATA */
+  font-weight: 500;
+}
+
+/* CSS Syntax Highlighting */
+.css-selector {
+  color: #800000; /* Dark red for selectors */
+  font-weight: 500;
+}
+
+.css-element {
+  color: #800000; /* Dark red for element selectors */
+  font-weight: 600;
+}
+
+.css-class {
+  color: #e3116c; /* Pink/magenta for classes */
+  font-weight: 600;
+}
+
+.css-id {
+  color: #795e26; /* Brown for IDs */
+  font-weight: 600;
+}
+
+.css-pseudo {
+  color: #0451a5; /* Blue for pseudo-classes */
+  font-weight: 500;
+}
+
+.css-at-rule {
+  color: #0451a5; /* Blue for @rules */
+  font-weight: 600;
+}
+
+.css-property {
+  color: #ff0000; /* Red for properties */
+  font-weight: 500;
+}
+
+.css-value {
+  color: #0000ff; /* Blue for values */
+}
+
+.css-string {
+  color: #a31515; /* Red for string values */
+}
+
+.css-number {
+  color: #098658; /* Green for numbers */
+  font-weight: 500;
+}
+
+.css-color {
+  color: #795e26; /* Brown for color values */
+  font-weight: 600;
+}
+
+.css-function {
+  color: #795e26; /* Brown for CSS functions */
+  font-weight: 500;
+}
+
+.css-important {
+  color: #d73a49; /* Red for !important */
+  font-weight: 700;
+}
+
+.css-comment {
+  color: #008000; /* Green for comments */
+  font-style: italic;
+}
+
+.css-punctuation {
+  color: #000000; /* Black for punctuation */
+  font-weight: 500;
 }
 
 .btn-minify,

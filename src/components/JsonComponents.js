@@ -1,5 +1,6 @@
 import { BeautifyJson, MinifyJson, JsonToXml } from '../utils/jsonUtils';
-import { copyToClipboard } from '../utils/clipboardUtils';
+import { copyToClipboard, getTextContent } from '../utils/clipboardUtils';
+import { highlightJson, highlightXml } from '../utils/syntaxHighlighter';
 
 // JSON Components
 export function JsonInput() {
@@ -18,13 +19,20 @@ export function JsonInput() {
 
 export function JsonOutput() {
   const handleCopy = (e) => {
-    const textarea = e.target.parentElement.querySelector('.code-output');
-    copyToClipboard(textarea.value, e.target);
+    const outputDiv = e.target.parentElement.querySelector('.code-output');
+    const text = getTextContent(outputDiv);
+    copyToClipboard(text, e.target);
   };
 
   return (
     <div className="textarea-container">
-      <textarea className="code-output" tabIndex="-1" defaultValue="JSON output will be displayed here"></textarea>
+      <div 
+        className="code-output" 
+        tabIndex="-1"
+        dangerouslySetInnerHTML={{
+          __html: '<span style="color: #999; font-style: italic;">JSON output will be displayed here</span>'
+        }}
+      ></div>
       <button className="copy-button" onClick={handleCopy} title="Copy output"></button>
     </div>
   );
@@ -37,13 +45,16 @@ export function BtnMinifyJson() {
       const outputElement = document.querySelector('.code-output');
       if (input){
         const output = MinifyJson(input);
-        outputElement.value = output;
         
         // Add error class if output is an error message
         if (output.startsWith("Error:")) {
           outputElement.classList.add('error');
+          outputElement.classList.remove('highlighted');
+          outputElement.innerHTML = output;
         } else {
           outputElement.classList.remove('error');
+          outputElement.classList.add('highlighted');
+          outputElement.innerHTML = highlightJson(output);
         }
       }
     }}>
@@ -59,13 +70,16 @@ export function BtnBeautifyJson() {
       const outputElement = document.querySelector('.code-output');
       if (input) {
         const output = BeautifyJson(input);
-        outputElement.value = output;
 
         // Add error class if output is an error message
         if (output.startsWith("Error:")) {
           outputElement.classList.add('error');
+          outputElement.classList.remove('highlighted');
+          outputElement.innerHTML = output;
         } else {
           outputElement.classList.remove('error');
+          outputElement.classList.add('highlighted');
+          outputElement.innerHTML = highlightJson(output);
         }
       }
     }}>
@@ -83,13 +97,16 @@ export function BtnConvertJson() {
       
       if (input) {
         const output = JsonToXml(input);
-        outputElement.value = output;
 
         // Add error class if output is an error message
         if (output.startsWith("Error:")) {
           outputElement.classList.add('error');
+          outputElement.classList.remove('highlighted');
+          outputElement.innerHTML = output;
         } else {
           outputElement.classList.remove('error');
+          outputElement.classList.add('highlighted');
+          outputElement.innerHTML = highlightXml(output);
         }
       }
     }}>

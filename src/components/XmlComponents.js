@@ -1,5 +1,6 @@
 import { BeautifyXml, MinifyXml, XmlToJson } from '../utils/xmlUtils';
-import { copyToClipboard } from '../utils/clipboardUtils';
+import { copyToClipboard, getTextContent } from '../utils/clipboardUtils';
+import { highlightXml, highlightJson } from '../utils/syntaxHighlighter';
 
 // XML Components
 export function XmlInput() {
@@ -18,13 +19,20 @@ export function XmlInput() {
 
 export function XmlOutput() {
   const handleCopy = (e) => {
-    const textarea = e.target.parentElement.querySelector('.code-output');
-    copyToClipboard(textarea.value, e.target);
+    const outputDiv = e.target.parentElement.querySelector('.code-output');
+    const text = getTextContent(outputDiv);
+    copyToClipboard(text, e.target);
   };
 
   return (
     <div className="textarea-container">
-      <textarea className="code-output" tabIndex="-1" defaultValue="XML output will be displayed here"></textarea>
+      <div 
+        className="code-output" 
+        tabIndex="-1"
+        dangerouslySetInnerHTML={{
+          __html: '<span style="color: #999; font-style: italic;">XML output will be displayed here</span>'
+        }}
+      ></div>
       <button className="copy-button" onClick={handleCopy} title="Copy output"></button>
     </div>
   );
@@ -37,13 +45,16 @@ export function BtnMinifyXml() {
       const outputElement = document.querySelector('.code-output');
       if (input){
         const output = MinifyXml(input);
-        outputElement.value = output;
         
         // Add error class if output is an error message
         if (output.startsWith("Error:")) {
           outputElement.classList.add('error');
+          outputElement.classList.remove('highlighted');
+          outputElement.innerHTML = output;
         } else {
           outputElement.classList.remove('error');
+          outputElement.classList.add('highlighted');
+          outputElement.innerHTML = highlightXml(output);
         }
       }
     }}>
@@ -59,13 +70,16 @@ export function BtnBeautifyXml() {
       const outputElement = document.querySelector('.code-output');
       if (input) {
         const output = BeautifyXml(input);
-        outputElement.value = output;
 
         // Add error class if output is an error message
         if (output.startsWith("Error:")) {
           outputElement.classList.add('error');
+          outputElement.classList.remove('highlighted');
+          outputElement.innerHTML = output;
         } else {
           outputElement.classList.remove('error');
+          outputElement.classList.add('highlighted');
+          outputElement.innerHTML = highlightXml(output);
         }
       }
     }}>
@@ -83,13 +97,16 @@ export function BtnConvertXml() {
       
       if (input) {
         const output = XmlToJson(input);
-        outputElement.value = output;
 
         // Add error class if output is an error message
         if (output.startsWith("Error:")) {
           outputElement.classList.add('error');
+          outputElement.classList.remove('highlighted');
+          outputElement.innerHTML = output;
         } else {
           outputElement.classList.remove('error');
+          outputElement.classList.add('highlighted');
+          outputElement.innerHTML = highlightJson(output);
         }
       }
     }}>
