@@ -26,15 +26,15 @@ export function highlightJson(jsonString) {
       // Highlight null
       .replace(/:\s*(null)\b/g, ': <span class="json-null">$1</span>')
       // Highlight structural punctuation
-      .replace(/([{}\[\],])/g, '<span class="json-punctuation">$1</span>')
+      .replace(/([{}[\],])/g, '<span class="json-punctuation">$1</span>')
       // Highlight string values in arrays (not preceded by :)
-      .replace(/(?<!:\s)("(?:[^"\\]|\\.)*")(?=\s*[,\]\}])/g, '<span class="json-string">$1</span>')
+      .replace(/(?<!:\s)("(?:[^"\\]|\\.)*")(?=\s*[,\]}])/g, '<span class="json-string">$1</span>')
       // Highlight numbers in arrays
-      .replace(/(?<!:\s)(-?\d+\.?\d*(?:[eE][+-]?\d+)?)(?=\s*[,\]\}])/g, '<span class="json-number">$1</span>')
+      .replace(/(?<!:\s)(-?\d+\.?\d*(?:[eE][+-]?\d+)?)(?=\s*[,\]}])/g, '<span class="json-number">$1</span>')
       // Highlight booleans in arrays
-      .replace(/(?<!:\s)(true|false)(?=\s*[,\]\}])/g, '<span class="json-boolean">$1</span>')
+      .replace(/(?<!:\s)(true|false)(?=\s*[,\]}])/g, '<span class="json-boolean">$1</span>')
       // Highlight null in arrays
-      .replace(/(?<!:\s)(null)(?=\s*[,\]\}])/g, '<span class="json-null">$1</span>');
+      .replace(/(?<!:\s)(null)(?=\s*[,\]}])/g, '<span class="json-null">$1</span>');
   } catch (error) {
     return jsonString;
   }
@@ -93,7 +93,7 @@ export function highlightCss(cssString) {
   escaped = escaped.replace(/(@[\w-]+)/g, '<span class="css-at-rule">$1</span>');
 
   // Highlight selectors (everything before {, excluding comments and @rules)
-  escaped = escaped.replace(/([^{}\/\*@][^{}]*?)(\s*\{)/g, function(match, selector, brace) {
+  escaped = escaped.replace(/([^{}*/@][^{}]*?)(\s*\{)/g, function(match, selector, brace) {
     // Don't highlight if it's inside a comment or @rule
     if (selector.includes('/*') || selector.includes('*/') || selector.includes('@')) {
       return match;
