@@ -161,7 +161,7 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ## 📧 Contact
 
-Jon Jones - [@joneszn](https://github.com/joneszn)
+Zeb Jones - [@joneszn](https://github.com/joneszn)
 
 Project Link: [https://github.com/joneszn/code-tools-app](https://github.com/joneszn/code-tools-app)
 
