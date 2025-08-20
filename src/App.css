@@ -516,3 +516,317 @@ body {
     height: 24px;
   }
 }
+
+/* GUID Generator Styles */
+.guid-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 20px;
+  padding: 20px;
+}
+
+.guid-controls {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 150px;
+}
+
+.control-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.guid-count-input {
+  padding: 8px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  width: 80px;
+}
+
+.guid-count-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.guid-format-select {
+  padding: 8px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  background: white;
+  min-width: 200px;
+}
+
+.guid-format-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.guid-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.generate-btn {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  color: white;
+  border: 1px solid #0d47a1;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
+  margin: 0;
+  outline: none;
+  position: relative;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.generate-btn:hover {
+  background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+  box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
+  transform: translateY(-1px);
+}
+
+.copy-btn, .clear-btn {
+  background: #f8f9fa;
+  color: #495057;
+  border: 2px solid #e0e0e0;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.copy-btn:hover {
+  background: #e9ecef;
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.clear-btn:hover {
+  background: #fff5f5;
+  border-color: #e53e3e;
+  color: #e53e3e;
+}
+
+.guid-output {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.output-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 16px 20px;
+  margin: 0;
+}
+
+.output-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.guid-list {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.guid-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+.guid-item:hover {
+  background: #e9ecef;
+  border-color: #667eea;
+}
+
+.guid-text {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  margin: 0;
+  color: #2d3748;
+  flex: 1;
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.copy-single-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.copy-single-btn:hover {
+  background: #5a6fd8;
+}
+
+.guid-placeholder {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.placeholder-content {
+  text-align: center;
+  color: #6c757d;
+  padding: 40px;
+  max-width: 600px;
+}
+
+.placeholder-content h3 {
+  color: #495057;
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.placeholder-content p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.format-examples {
+  text-align: left;
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 20px;
+  border: 1px solid #e9ecef;
+}
+
+.format-examples h4 {
+  color: #495057;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.format-examples ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.format-examples li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e9ecef;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+}
+
+.format-examples li:last-child {
+  border-bottom: none;
+}
+
+.format-examples li strong {
+  color: #667eea;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin-right: 8px;
+}
+
+/* Icon styles for GUID buttons */
+.generate-btn .icon-refresh::before { content: "↻"; }
+.copy-btn .icon-copy::before,
+.copy-single-btn .icon-copy::before { content: "⎘"; }
+.clear-btn .icon-trash::before { content: "×"; }
+
+/* Responsive design for GUID components */
+@media (max-width: 768px) {
+  .guid-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  
+  .control-group {
+    min-width: auto;
+  }
+  
+  .guid-buttons {
+    margin-left: 0;
+    justify-content: center;
+  }
+  
+  .guid-count-input {
+    width: 100%;
+  }
+  
+  .guid-format-select {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .guid-item {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .copy-single-btn {
+    margin-left: 0;
+    align-self: center;
+  }
+}

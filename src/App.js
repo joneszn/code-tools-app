@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { JsonInput, JsonOutput, BtnMinifyJson, BtnBeautifyJson, BtnConvertJson } from './components/JsonComponents';
 import { XmlInput, XmlOutput, BtnMinifyXml, BtnBeautifyXml, BtnConvertXml } from './components/XmlComponents';
 import { CssInput, CssOutput, BtnMinifyCss, BtnBeautifyCss } from './components/CssComponents';
+import GuidComponents from './components/GuidComponents';
 
 function App() {
   const [activeTab, setActiveTab] = useState('json');
@@ -55,6 +56,8 @@ function App() {
             </div>
           </div>
         );
+      case 'guid':
+        return <GuidComponents />;
       default:
         return null;
     }
@@ -80,6 +83,12 @@ function App() {
           onClick={() => setActiveTab('css')}
         >
           CSS
+        </button>
+        <button 
+          className={`tab-button ${activeTab === 'guid' ? 'active' : ''}`}
+          onClick={() => setActiveTab('guid')}
+        >
+          GUID
         </button>
       </div>
       <div className="tab-content">
