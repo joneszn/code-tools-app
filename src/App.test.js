@@ -15,12 +15,12 @@ test('renders JSON components by default', () => {
   render(<App />);
   const inputTextarea = screen.getByPlaceholderText(/enter json here/i);
   const outputTextarea = screen.getByDisplayValue(/json output will be displayed here/i);
-  const minifyButton = screen.getByText(/minify/i);
-  const beautifyButton = screen.getByText(/beautify/i);
+  const compressButton = screen.getByText(/compress/i);
+  const formatButton = screen.getByText(/format/i);
   expect(inputTextarea).toBeInTheDocument();
   expect(outputTextarea).toBeInTheDocument();
-  expect(minifyButton).toBeInTheDocument();
-  expect(beautifyButton).toBeInTheDocument();
+  expect(compressButton).toBeInTheDocument();
+  expect(formatButton).toBeInTheDocument();
 });
 
 test('switches to XML tab', () => {
@@ -49,7 +49,7 @@ test('minifies valid JSON correctly', () => {
   render(<App />);
   const inputTextarea = screen.getByPlaceholderText(/enter json here/i);
   const outputTextarea = screen.getByDisplayValue(/json output will be displayed here/i);
-  const minifyButton = screen.getByText(/minify/i);
+  const compressButton = screen.getByText(/compress/i);
 
   // Input valid JSON with spaces and formatting
   const validJSON = `{
@@ -59,7 +59,7 @@ test('minifies valid JSON correctly', () => {
   }`;
   
   fireEvent.change(inputTextarea, { target: { value: validJSON } });
-  fireEvent.click(minifyButton);
+  fireEvent.click(compressButton);
   
   const expectedMinified = '{"name":"John","age":30,"city":"New York"}';
   expect(outputTextarea.value).toBe(expectedMinified);
@@ -70,13 +70,13 @@ test('beautifies valid JSON correctly', () => {
   render(<App />);
   const inputTextarea = screen.getByPlaceholderText(/enter json here/i);
   const outputTextarea = screen.getByDisplayValue(/json output will be displayed here/i);
-  const beautifyButton = screen.getByText(/beautify/i);
+  const formatButton = screen.getByText(/format/i);
 
   // Input minified JSON
   const minifiedJSON = '{"name":"John","age":30,"city":"New York"}';
   
   fireEvent.change(inputTextarea, { target: { value: minifiedJSON } });
-  fireEvent.click(beautifyButton);
+  fireEvent.click(formatButton);
   
   const expectedBeautified = `{
   "name": "John",
@@ -91,12 +91,12 @@ test('handles invalid JSON with error message for minify', () => {
   render(<App />);
   const inputTextarea = screen.getByPlaceholderText(/enter json here/i);
   const outputTextarea = screen.getByDisplayValue(/json output will be displayed here/i);
-  const minifyButton = screen.getByText(/minify/i);
+  const compressButton = screen.getByText(/compress/i);
 
   const invalidJSON = '{"name": "John", "age": 30,}'; // trailing comma
   
   fireEvent.change(inputTextarea, { target: { value: invalidJSON } });
-  fireEvent.click(minifyButton);
+  fireEvent.click(compressButton);
   
   expect(outputTextarea.value).toMatch(/^Error: Invalid JSON format/);
   expect(outputTextarea).toHaveClass('error');
@@ -109,12 +109,12 @@ test('XML minify removes whitespace', () => {
   
   const inputTextarea = screen.getByPlaceholderText(/enter xml here/i);
   const outputTextarea = screen.getByDisplayValue(/xml output will be displayed here/i);
-  const minifyButton = screen.getByText(/minify/i);
+  const compressButton = screen.getByText(/compress/i);
 
   const xmlWithSpaces = '<root>\n  <item>value</item>\n</root>';
   
   fireEvent.change(inputTextarea, { target: { value: xmlWithSpaces } });
-  fireEvent.click(minifyButton);
+  fireEvent.click(compressButton);
   
   expect(outputTextarea.value).toBe('<root><item>value</item></root>');
 });
@@ -126,7 +126,7 @@ test('CSS minify removes unnecessary whitespace', () => {
   
   const inputTextarea = screen.getByPlaceholderText(/enter css here/i);
   const outputTextarea = screen.getByDisplayValue(/css output will be displayed here/i);
-  const minifyButton = screen.getByText(/minify/i);
+  const compressButton = screen.getByText(/compress/i);
 
   const cssWithSpaces = `.class {
     color: red;
@@ -134,7 +134,7 @@ test('CSS minify removes unnecessary whitespace', () => {
   }`;
   
   fireEvent.change(inputTextarea, { target: { value: cssWithSpaces } });
-  fireEvent.click(minifyButton);
+  fireEvent.click(compressButton);
   
   expect(outputTextarea.value).toBe('.class{color:red;margin:10px}');
 });

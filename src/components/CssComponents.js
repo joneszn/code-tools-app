@@ -1,12 +1,33 @@
 import { BeautifyCss, MinifyCss } from '../utils/cssUtils';
+import { copyToClipboard } from '../utils/clipboardUtils';
 
 // CSS Components
 export function CssInput() {
-  return (<textarea placeholder="Enter CSS here" className="code-input" />);
+  const handleCopy = (e) => {
+    const textarea = e.target.parentElement.querySelector('.code-input');
+    copyToClipboard(textarea.value, e.target);
+  };
+
+  return (
+    <div className="textarea-container">
+      <textarea placeholder="Enter CSS here" className="code-input" />
+      <button className="copy-button" onClick={handleCopy} title="Copy input"></button>
+    </div>
+  );
 }
 
 export function CssOutput() {
-  return (<textarea className="code-output" tabIndex="-1" defaultValue="CSS output will be displayed here"></textarea>);
+  const handleCopy = (e) => {
+    const textarea = e.target.parentElement.querySelector('.code-output');
+    copyToClipboard(textarea.value, e.target);
+  };
+
+  return (
+    <div className="textarea-container">
+      <textarea className="code-output" tabIndex="-1" defaultValue="CSS output will be displayed here"></textarea>
+      <button className="copy-button" onClick={handleCopy} title="Copy output"></button>
+    </div>
+  );
 }
 
 export function BtnMinifyCss() {
@@ -26,7 +47,7 @@ export function BtnMinifyCss() {
         }
       }
     }}>
-      Minify
+      Compress
     </button>
   );
 }
@@ -48,7 +69,7 @@ export function BtnBeautifyCss() {
         }
       }
     }}>
-      Beautify
+      Format
     </button>
   );
 }
